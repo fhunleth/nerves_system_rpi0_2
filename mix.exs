@@ -1,8 +1,8 @@
-defmodule NervesSystemRpi3a.MixProject do
+defmodule NervesSystemRpi02.MixProject do
   use Mix.Project
 
   @github_organization "nerves-project"
-  @app :nerves_system_rpi3a
+  @app :nerves_system_rpi0_2
   @source_url "https://github.com/#{@github_organization}/#{@app}"
   @version Path.join(__DIR__, "VERSION")
            |> File.read!()
@@ -53,12 +53,12 @@ defmodule NervesSystemRpi3a.MixProject do
       # variables to the crosscompile environment. These are intended for
       # llvm-based tooling that may need more precise processor information.
       env: [
-        {"TARGET_ARCH", "arm"},
+        {"TARGET_ARCH", "aarch64"},
         {"TARGET_CPU", "cortex_a53"},
         {"TARGET_OS", "linux"},
-        {"TARGET_ABI", "gnueabihf"},
+        {"TARGET_ABI", "gnu"},
         {"TARGET_GCC_FLAGS",
-         "-mabi=aapcs-linux -mfpu=fp-armv8 -marm -fstack-protector-strong -mfloat-abi=hard -mcpu=cortex-a53 -fPIE -pie -Wl,-z,now -Wl,-z,relro"}
+          "-mabi=lp64 -fstack-protector-strong -mcpu=cortex-a53 -fPIE -pie -Wl,-z,now -Wl,-z,relro"}
       ],
       checksum: package_files()
     ]
@@ -68,7 +68,7 @@ defmodule NervesSystemRpi3a.MixProject do
     [
       {:nerves, "~> 1.5.4 or ~> 1.6.0 or ~> 1.7.15 or ~> 1.8", runtime: false},
       {:nerves_system_br, "1.22.5", runtime: false},
-      {:nerves_toolchain_armv7_nerves_linux_gnueabihf, "~> 1.8.0", runtime: false},
+      {:nerves_toolchain_aarch64_nerves_linux_gnu, "~> 1.8.0", runtime: false},
       {:nerves_system_linter, "~> 0.4", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.22", only: :docs, runtime: false}
     ]
@@ -76,7 +76,7 @@ defmodule NervesSystemRpi3a.MixProject do
 
   defp description do
     """
-    Nerves System - Raspberry Pi 3 A+ and Zero 2 W
+    Nerves System - Zero 2 W (64-bits)
     """
   end
 

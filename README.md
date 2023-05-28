@@ -1,10 +1,13 @@
-# Raspberry Pi 3 A+ and Zero 2 W
+# Raspberry Pi Zero 2 W and 3 A+ (64-bit)
 
-[![CircleCI](https://circleci.com/gh/nerves-project/nerves_system_rpi3a.svg?style=svg)](https://circleci.com/gh/nerves-project/nerves_system_rpi3a)
-[![Hex version](https://img.shields.io/hexpm/v/nerves_system_rpi3a.svg "Hex version")](https://hex.pm/packages/nerves_system_rpi3a)
+[![CircleCI](https://circleci.com/gh/nerves-project/nerves_system_rpi0_2.svg?style=svg)](https://circleci.com/gh/nerves-project/nerves_system_rpi0_2)
+[![Hex version](https://img.shields.io/hexpm/v/nerves_system_rpi0_2.svg "Hex version")](https://hex.pm/packages/nerves_system_rpi0_2)
 
-This is the base Nerves System configuration for the Raspberry Pi 3 Model A+
-with the USB port running in gadget mode.
+This is the base Nerves System configuration for the Raspberry Pi Zero 2 W with
+the USB port running in gadget mode. It is similar to
+[nerves_system_rpi3a](https://github.com/nerves-project/nerves_system_rpi3a)
+except that it runs the ARM Cortex-A53 in 64-bit mode to support the [Erlang
+JIT](https://www.erlang.org/doc/apps/erts/beamasm).
 
 ![Raspberry Pi 3 A+ image](assets/images/rpi_a_plus.png)
 <br><sup>[Image credit](#rpi)</sup>
@@ -40,7 +43,7 @@ To do this, you'll need a USB A to USB A connector like
 ## Using
 
 The most common way of using this Nerves System is create a project with `mix
-nerves.new` and to export `MIX_TARGET=rpi3a`. See the [Getting started
+nerves.new` and to export `MIX_TARGET=rpi0_2`. See the [Getting started
 guide](https://hexdocs.pm/nerves/getting-started.html#creating-a-new-nerves-app)
 for more information.
 
