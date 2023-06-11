@@ -37,8 +37,8 @@ camera_auto_detect=1
 # Automatically load overlays for detected DSI displays
 display_auto_detect=1
 
-# Enable DRM VC4 V3D driver
-dtoverlay=vc4-kms-v3d
+# Enable DRM VC4 V3D driver - but don't use default 256MB CMA size
+dtoverlay=vc4-kms-v3d,cma-128
 max_framebuffers=2
 
 # Comment this in or modify to enable OneWire
