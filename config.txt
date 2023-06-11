@@ -48,8 +48,8 @@ max_framebuffers=2
 dtoverlay=dwc2
 
 # The ramoops overlay works with the pstore driver to preserve crash
-# information across reboots in DRAM
-dtoverlay=ramoops
+# information across reboots in DRAM. Base address is 64KB before 64MB.
+dtoverlay=ramoops,base-addr=0x3FF0000,console-size=0x4000,record-size=0x4000
 
 # Enable the UART (/dev/ttyAMA0) on the RPi3.
 enable_uart=1
