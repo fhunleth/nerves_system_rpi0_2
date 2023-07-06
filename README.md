@@ -9,36 +9,26 @@ the USB port running in gadget mode. It is similar to
 except that it runs the ARM Cortex-A53 in 64-bit mode to support the [Erlang
 JIT](https://www.erlang.org/doc/apps/erts/beamasm).
 
-![Raspberry Pi 3 A+ image](assets/images/rpi_a_plus.png)
+![Raspberry Pi Zero 2 W image](assets/images/rpi-zero2.jpg)
 <br><sup>[Image credit](#rpi)</sup>
 
-| Feature              | Description                     |
-| -------------------- | ------------------------------- |
-| CPU                  | 1.4 GHz quad-core ARM Cortex-A53|
-| Memory               | 512 MB DRAM                     |
-| Storage              | MicroSD                         |
-| Linux kernel         | 6.1 w/ Raspberry Pi patches     |
+| Feature              | Description                      |
+| -------------------- | -------------------------------- |
+| CPU                  | 1.4 GHz quad-core ARM Cortex-A53 |
+| Memory               | 512 MB DRAM                      |
+| Storage              | MicroSD                          |
+| Linux kernel         | 6.1 w/ Raspberry Pi patches      |
 | IEx terminal         | UART `ttyAMA0` Can be changed to HDMI |
 | GPIO, I2C, SPI       | Yes - [Elixir Circuits](https://github.com/elixir-circuits) |
-| ADC                  | No                              |
-| PWM                  | Yes, but no Elixir support      |
-| UART                 | 1 available - `ttyAMA0`         |
-| Display              | HDMI or 7" RPi Touchscreen      |
-| Camera               | Yes - via rpi-userland          |
-| Ethernet             | No                              |
-| WiFi                 | Yes                             |
-| Bluetooth            | [See Bluetooth](#bluetooth)     |
-| Audio                | HDMI out                        |
-
-## Gadget mode on the 3A+!
-
-The Raspberry Pi 3 Model A+ is supported by the official
-[nerves_system_rpi3](https://github.com/nerves-project/nerves_system_rpi3), but
-the USB port is configured to work as a host only. This Raspberry Pi can be
-connected directly to your computer via a USB cable like the Raspberry Pi Zeros.
-To do this, you'll need a USB A to USB A connector like
-[this](https://www.monoprice.com/product?p_id=5443) or
-[this](https://www.microcenter.com/product/431166/usb-a-to-a-high-speed-development-board-cable).
+| ADC                  | No                               |
+| PWM                  | Yes, but no Elixir support       |
+| UART                 | 1 available - `ttyAMA0`          |
+| Display              | HDMI or 7" RPi Touchscreen       |
+| Camera               | Official RPi Cameras (libcamera) |
+| Ethernet             | No                               |
+| WiFi                 | Yes                              |
+| Bluetooth            | [See Bluetooth](#bluetooth)      |
+| Audio                | HDMI out                         |
 
 ## Using
 
@@ -53,14 +43,32 @@ systems](https://hexdocs.pm/nerves/customizing-systems.html).
 
 ## Supported WiFi devices
 
-The base image includes drivers for the onboard Raspberry Pi 3 A+ wifi module
+The base image includes drivers for the onboard Raspberry Pi Zero 2 wifi module
 (`brcmfmac` driver).
+
+## Camera
+
+This system supports the official Raspberry Pi camera modules via
+[`libcamera`](https://libcamera.org/). The `libcamera` applications are included so it's
+possible to replicate many of the examples in the official [Raspberry Pi Camera
+Documentation](https://www.raspberrypi.com/documentation/computers/camera_software.html).
+
+Here's an example commandline to run:
+
+```elixir
+cmd("libcamera-jpeg -n -v -o /data/test.jpeg")
+```
+
+On success, you'll get an image in `/data` that you can copy off with `sftp`.
+
+Since `libcamera` is being used instead of MMAL, the Elixir
+[picam](https://hex.pm/packages/picam) library won't work.
 
 ## Bluetooth
 
 [BlueHeronTransportUART](https://github.com/blue-heron/blue_heron_transport_uart)
-supports Bluetooth on the Raspberry Pi 3 A+ or Zero 2 W using `ttyS0`. The
-details are similar to the [RPi Zero W]
+supports Bluetooth on the Raspberry Pi Zero 2 W using `ttyS0`. The details are
+similar to the [RPi Zero W]
 (https://github.com/nerves-project/nerves_system_rpi0/issues/224#issuecomment-913799838).
 
 ## Audio
@@ -77,6 +85,17 @@ cmd("amixer cset numid=3 2")
 ```
 
 Change the last argument to `amixer` to `1` to output to the stereo output jack.
+
+## Gadget mode on the 3A+!
+
+The Raspberry Pi 3 Model A+ is supported by the official
+[nerves_system_rpi3](https://github.com/nerves-project/nerves_system_rpi3), but
+the USB port is configured to work as a host only. This Raspberry Pi can be
+connected directly to your computer via a USB cable like the Raspberry Pi Zeros.
+To do this, you'll need a USB A to USB A connector like
+[this](https://www.monoprice.com/product?p_id=5443) or
+[this](https://www.microcenter.com/product/431166/usb-a-to-a-high-speed-development-board-cable).
+
 
 ## Linux's preempt_rt patches
 
@@ -157,12 +176,4 @@ the Linux kernel to avoid any issues. Unfortunately, none of these are tagged by
 the Raspberry Pi Foundation so I either attempt to match what's in Raspbian or
 take versions of the repositories that have similar commit times.
 
-## Installation
-
-If you're new to Nerves, check out the
-[nerves_init_gadget](https://github.com/nerves-project/nerves_init_gadget) project for
-creating a starter project for the Raspberry Pi 3 Model A+. It will get you
-started with the basics like bringing up the virtual Ethernet interface,
-initializing the application partition, and enabling ssh-based firmware updates.
-
-[Image credit](#rpi): This image is from [raspberrypi.org](https://www.raspberrypi.org/products/raspberry-pi-3-model-a-plus/).
+[Image credit](#rpi): This image is from [raspberrypi.org](https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/).
