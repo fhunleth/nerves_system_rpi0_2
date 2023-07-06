@@ -45,6 +45,8 @@ max_framebuffers=2
 # NOTE: check that the overlay that you specify is in the boot partition or
 #       this won't work.
 #dtoverlay=w1-gpio-pullup,gpiopin=4
+
+# Support USB gadget mode on the USB-C port
 dtoverlay=dwc2
 
 # The ramoops overlay works with the pstore driver to preserve crash
