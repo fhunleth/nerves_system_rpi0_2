@@ -1,7 +1,7 @@
 defmodule NervesSystemRpi02.MixProject do
   use Mix.Project
 
-  @github_organization "nerves-project"
+  @github_organization "fhunleth"
   @app :nerves_system_rpi0_2
   @source_url "https://github.com/#{@github_organization}/#{@app}"
   @version Path.join(__DIR__, "VERSION")
