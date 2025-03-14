@@ -1,7 +1,8 @@
 # Raspberry Pi Zero 2 W and 3 A+ (64-bit)
 
-[![CircleCI](https://circleci.com/gh/nerves-project/nerves_system_rpi0_2.svg?style=svg)](https://circleci.com/gh/nerves-project/nerves_system_rpi0_2)
 [![Hex version](https://img.shields.io/hexpm/v/nerves_system_rpi0_2.svg "Hex version")](https://hex.pm/packages/nerves_system_rpi0_2)
+[![CI](https://github.com/fhunleth/nerves_system_rpi0_2/actions/workflows/ci.yml/badge.svg)](https://github.com/fhunleth/nerves_system_rpi0_2/actions/workflows/ci.yml)
+[![REUSE status](https://api.reuse.software/badge/github.com/fhunleth/nerves_system_rpi0_2)](https://api.reuse.software/info/github.com/fhunleth/nerves_system_rpi0_2)
 
 This is the base Nerves System configuration for the Raspberry Pi Zero 2 W with
 the USB port running in gadget mode. It is similar to
@@ -9,7 +10,7 @@ the USB port running in gadget mode. It is similar to
 except that it runs the ARM Cortex-A53 in 64-bit mode to support the [Erlang
 JIT](https://www.erlang.org/doc/apps/erts/beamasm).
 
-![Raspberry Pi Zero 2 W image](assets/images/rpi-zero2.jpg)
+![Raspberry Pi Zero 2 W image](assets/images/Raspberry_Pi_Zero_2_W.jpg)
 <br><sup>[Image credit](#rpi)</sup>
 
 | Feature              | Description                      |
@@ -176,4 +177,5 @@ the Linux kernel to avoid any issues. Unfortunately, none of these are tagged by
 the Raspberry Pi Foundation so I either attempt to match what's in Raspbian or
 take versions of the repositories that have similar commit times.
 
-[Image credit](#rpi): This image is from [raspberrypi.org](https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/).
+[Image credit](#rpi): This image is by SparkFun Electronics - https://www.sparkfun.com/products/18713, CC BY 2.0, https://commons.wikimedia.org/w/index.php?curid=111936085
+
