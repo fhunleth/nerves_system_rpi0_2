@@ -19,7 +19,10 @@ defmodule NervesSystemRpi02.MixProject do
       description: description(),
       package: package(),
       deps: deps(),
-      aliases: [loadconfig: [&bootstrap/1]],
+      aliases: [
+        loadconfig: [&bootstrap/1],
+        generate_fwup_conf: &generate_fwup_conf/1
+      ],
       docs: docs()
     ]
   end
@@ -58,7 +61,7 @@ defmodule NervesSystemRpi02.MixProject do
         {"TARGET_OS", "linux"},
         {"TARGET_ABI", "gnu"},
         {"TARGET_GCC_FLAGS",
-          "-mabi=lp64 -fstack-protector-strong -mcpu=cortex-a53 -fPIE -pie -Wl,-z,now -Wl,-z,relro"}
+         "-mabi=lp64 -fstack-protector-strong -mcpu=cortex-a53 -fPIE -pie -Wl,-z,now -Wl,-z,relro"}
       ],
       checksum: package_files()
     ]
@@ -111,6 +114,7 @@ defmodule NervesSystemRpi02.MixProject do
       "cmdline.txt",
       "config.txt",
       "fwup-ops.conf",
+      "fwup.conf.eex",
       "fwup.conf",
       "LICENSES/*",
       "linux-6.6.defconfig",
@@ -142,5 +146,15 @@ defmodule NervesSystemRpi02.MixProject do
     else
       System.put_env("MIX_TARGET", "target")
     end
+  end
+
+  defp generate_fwup_conf(_args) do
+    template_path = "fwup.conf.eex"
+    output_path = "fwup.conf"
+
+    Mix.shell().info("Generating fwup.conf")
+
+    content = EEx.eval_file(template_path)
+    File.write!(output_path, content)
   end
 end
